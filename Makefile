@@ -19,6 +19,14 @@ sqlc:
 test: 
 	go test -v -cover ./...
 
+test1: 
+	cd db && export "GO111MODULE=on" && go mod tidy && go test -v ./sqlc -cover
+
+dockerconnect:
+	docker exec -it postgres12 psql -U root -d simple_bank
+
+isolationtestconnect:
+	docker exec -it mysql8 mysql -uroot -psecret simple_bank
 # go test -v ./sqlc -cover
 	
-.PHONY: postgres createdb dropdb sqlc test
+.PHONY: postgres createdb dropdb sqlc test dockerconnect
