@@ -11,6 +11,26 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+
+
+    # Service containers to run with `container-job`
+    services:
+      postgres:
+        image: postgres:12
+        # postgresql://root:secret@localhost:5433/simple_bank?sslmode=disable
+        env:
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: secret
+          POSTGRES_DB: simple_bank
+
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5433:5432
     steps:
     - uses: actions/checkout@v3
 
@@ -19,6 +39,9 @@ jobs:
       with:
         go-version: 1.18
       id: go 
+
+    - name: Run migrations
+      run: make migrateup
 
     - name: Test
       run: make test
