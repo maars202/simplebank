@@ -6,3 +6,5 @@ https://github.com/lib/pq driver used for connection to talk to driver
 
 
 docker exec -it postgres12 psql -U root -d simple_bank
+
+https://github.com/begmaroman/go-micro-boilerplate
