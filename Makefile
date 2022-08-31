@@ -28,5 +28,8 @@ dockerconnect:
 isolationtestconnect:
 	docker exec -it mysql8 mysql -uroot -psecret simple_bank
 # go test -v ./sqlc -cover
+
+server: 
+	export "GO111MODULE=on" && go mod tidy && go run main.go
 	
-.PHONY: postgres createdb dropdb sqlc test dockerconnect
+.PHONY: postgres createdb dropdb sqlc test dockerconnect server
