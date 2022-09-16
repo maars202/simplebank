@@ -19,6 +19,9 @@ sqlc:
 test: 
 	go test -v -cover ./...
 
+cleantestcache:
+	go clean -testcache
+
 test1: 
 	cd db && export "GO111MODULE=on" && go mod tidy && go test -v ./sqlc -cover
 
@@ -32,4 +35,4 @@ isolationtestconnect:
 server: 
 	export "GO111MODULE=on" && go mod tidy && go run main.go
 	
-.PHONY: postgres createdb dropdb sqlc test dockerconnect server
+.PHONY: postgres createdb dropdb sqlc test dockerconnect server cleantestcache

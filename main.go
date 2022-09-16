@@ -16,6 +16,8 @@ func init() {
     fmt.Println("launch initialization")
 }
 
+
+// later all these code will be taken as environment variables:
 const (
 	dbDriver = "postgres"
 	dbSource = "postgresql://root:secret@localhost:5433/simple_bank?sslmode=disable"
